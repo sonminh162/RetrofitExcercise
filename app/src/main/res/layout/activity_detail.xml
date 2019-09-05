@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Detail">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dp16">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp15"
+            android:text="Detail Employee"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+        <EditText
+            android:id="@+id/update_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="name?"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/update_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="salary?"/>
+
+        <EditText
+            android:id="@+id/update_age"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="age?"/>
+
+        <Button
+            android:id="@+id/button_update"
+            android:layout_width="@dimen/dp200"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp15"
+            android:background="@color/navyBlue"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="@color/aliceBlue"/>
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="@dimen/dp200"
+            android:layout_height="wrap_content"
+            android:background="@color/cinnabar"
+            android:textColor="@color/aliceBlue"
+            android:textAllCaps="false"
+            android:text="Delete"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</RelativeLayout>
