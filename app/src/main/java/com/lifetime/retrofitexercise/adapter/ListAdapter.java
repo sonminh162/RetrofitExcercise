@@ -112,7 +112,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             textViewName.setText(employee.getName());
             textViewAge.setText("age:"+employee.getAge());
             textViewSalary.setText("$"+employee.getSalary());
-            textViewId.setText("Employee ID: "+employee.getId());
+//            textViewId.setText("Employee ID: "+employee.getId());
         }
 
         @Override
