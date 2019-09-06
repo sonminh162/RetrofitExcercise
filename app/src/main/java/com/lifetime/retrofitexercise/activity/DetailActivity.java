@@ -43,9 +43,23 @@ public class DetailActivity extends AppCompatActivity {
         buttonUpdate = findViewById(R.id.button_update);
         buttonDelete = findViewById(R.id.button_delete);
 
-        employee = (Employee) getIntent().getSerializableExtra("employee");
+//        employee = (Employee) getIntent().getSerializableExtra("employee");
 
-        loadEmployee(employee);
+        Bundle bundle = getIntent().getBundleExtra("package");
+        int idResult = bundle.getInt("id");
+        Call<Employee> call = service.getEmployeeById(idResult);
+        call.enqueue(new Callback<Employee>() {
+            @Override
+            public void onResponse(Call<Employee> call, Response<Employee> response) {
+                employee = response.body();
+                loadEmployee(employee);
+            }
+
+            @Override
+            public void onFailure(Call<Employee> call, Throwable t) {
+
+            }
+        });
 
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

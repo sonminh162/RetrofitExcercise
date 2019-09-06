@@ -1,7 +1,6 @@
 package com.lifetime.retrofitexercise.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lifetime.retrofitexercise.R;
-import com.lifetime.retrofitexercise.activity.DetailActivity;
 import com.lifetime.retrofitexercise.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> implements Filterable {
+    private OnItemClickListener listener;
     private List<Employee> employees;
     private Context context;
 
     private List<Employee> emloyeesFullList;
 
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
     public ListAdapter(List<Employee> employees, Context context) {
-        this.employees = employees;
+        this.employees = employees  ;
         this.context = context;
         emloyeesFullList = new ArrayList<>(employees);
     }
@@ -90,7 +93,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         }
     };
 
-    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListViewHolder extends RecyclerView.ViewHolder{
         public final View mView;
         TextView textViewName;
         TextView textViewSalary;
@@ -106,7 +109,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             textViewAge = itemView.findViewById(R.id.textViewAge);
             id = itemView.findViewById(R.id.textViewId);
 
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.OnItemClick(employees.get(position));
+                    }
+                }
+            });
+
+
         }
 
         public void bindView(Employee employee) {
@@ -117,15 +130,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             id.setText("EmployeeID: " + employee.getId());
         }
 
-        @Override
-        public void onClick(View view) {
-            Employee employee = employees.get(getAdapterPosition());
+//        @Override
+//        public void onClick(View view) {
+//            Employee employee = employees.get(getAdapterPosition());
+//
+//            Intent intent = new Intent(context, DetailActivity.class);
+//            intent.putExtra("employee", employee);
+//
+//            context.startActivity(intent);
+//        }
+    }
 
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("employee", employee);
-
-            context.startActivity(intent);
-        }
+    public interface OnItemClickListener{
+        void OnItemClick(Employee employee);
     }
 
 }

@@ -20,6 +20,9 @@ public interface GetDataService {
     @GET("/api/v1/employees")
     Call<List<Employee>> getAllEmployees();
 
+    @GET("/api/v1/employee/{id}")
+    Call<Employee> getEmployeeById(@Path("id") int id);
+
     @PUT("/api/v1/update/{id}")
     Call<EmployeeResponse> updateEmployee(@Path("id") int id, @Body EmployeeResponse employee);
 

@@ -29,6 +29,7 @@ public class ListActivity extends AppCompatActivity {
     private ListAdapter adapter;
     private RecyclerView recyclerView;
     ProgressDialog progressDialog;
+    GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,12 @@ public class ListActivity extends AppCompatActivity {
                 loadView();
             }
         });
+
+
     }
 
     private void loadView(){
         progressDialog.show();
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<java.util.List<Employee>> call = service.getAllEmployees();
         call.enqueue(new Callback<java.util.List<Employee>>() {
             @Override
@@ -83,6 +85,27 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        adapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(Employee employee) {
+                Call<Employee> call = service.getEmployeeById(employee.getId());
+                call.enqueue(new Callback<Employee>() {
+                    @Override
+                    public void onResponse(Call<Employee> call, Response<Employee> response) {
+                        Intent intent = new Intent(ListActivity.this,DetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("id",response.body().getId());
+                        intent.putExtra("package",bundle);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Employee> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -117,4 +140,6 @@ public class ListActivity extends AppCompatActivity {
 
         loadView();
     }
+
+
 }
