@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Detail">
+    tools:context=".activity.DetailActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -39,6 +39,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="age?"/>
+
+        <TextView
+            android:id="@+id/current_id"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CurrentID: 17889"/>
 
         <Button
             android:id="@+id/button_update"

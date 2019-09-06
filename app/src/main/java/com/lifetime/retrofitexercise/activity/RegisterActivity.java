@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     TextView registerName, registerSalary, registerAge;
     Button buttonSave;
@@ -70,13 +70,13 @@ public class Register extends AppCompatActivity {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
                 finish();
-                startActivity(new Intent(getApplication(), List.class));
-                Toast.makeText(Register.this, "Saved", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplication(), ListActivity.class));
+                Toast.makeText(RegisterActivity.this, "Saved", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<EmployeeResponse> call, Throwable t) {
-                Toast.makeText(Register.this, "Fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                 Log.d("BBB:", t.getMessage());
             }
         });

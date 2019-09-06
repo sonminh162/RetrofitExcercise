@@ -7,8 +7,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface GetDataService {
     @POST("/api/v1/create")
@@ -17,4 +20,9 @@ public interface GetDataService {
     @GET("/api/v1/employees")
     Call<List<Employee>> getAllEmployees();
 
+    @PUT("/api/v1/update/{id}")
+    Call<EmployeeResponse> updateEmployee(@Path("id") int id, @Body EmployeeResponse employee);
+
+    @DELETE("/api/v1/delete/{id}")
+    Call<Void> deleteEmployee(@Path("id") int id);
 }

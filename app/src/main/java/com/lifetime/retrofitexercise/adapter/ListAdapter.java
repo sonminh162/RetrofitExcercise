@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lifetime.retrofitexercise.R;
-import com.lifetime.retrofitexercise.activity.Detail;
+import com.lifetime.retrofitexercise.activity.DetailActivity;
 import com.lifetime.retrofitexercise.model.Employee;
 
 import java.util.ArrayList;
@@ -35,13 +35,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recyclerview_employee,parent,false);
+        View view = layoutInflater.inflate(R.layout.recyclerview_employee, parent, false);
         return new ListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.bindView(employees.get(position));
+//        holder.id.setBackgroundColor(0xFF93C47D);
 
 //        Picasso.Builder builder = new Picasso.Builder(context);
 //        builder.downloader(new OkHttp3Downloader(context));
@@ -58,18 +59,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         return exampleFilter;
     }
 
-    private Filter exampleFilter = new Filter(){
+    private Filter exampleFilter = new Filter() {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Employee> filteredList = new ArrayList<>();
 
-            if(constraint == null || constraint.length() == 0){
+            if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(emloyeesFullList);
-            }else{
+            } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for(Employee employee : emloyeesFullList){
-                    if(employee.getName().toLowerCase().contains(filterPattern)){
+                for (Employee employee : emloyeesFullList) {
+                    if (employee.getName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(employee);
                     }
                 }
@@ -89,12 +90,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         }
     };
 
-    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final View mView;
         TextView textViewName;
         TextView textViewSalary;
         TextView textViewAge;
-        TextView textViewId;
+        TextView id;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,24 +104,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             textViewName = itemView.findViewById(R.id.textViewName);
             textViewSalary = itemView.findViewById(R.id.textViewSalary);
             textViewAge = itemView.findViewById(R.id.textViewAge);
-            textViewId = itemView.findViewById(R.id.textViewId);
+            id = itemView.findViewById(R.id.textViewId);
 
             itemView.setOnClickListener(this);
         }
 
-        public void bindView(Employee employee){
+        public void bindView(Employee employee) {
+
             textViewName.setText(employee.getName());
-            textViewAge.setText("age:"+employee.getAge());
-            textViewSalary.setText("$"+employee.getSalary());
-//            textViewId.setText("Employee ID: "+employee.getId());
+            textViewAge.setText("age:" + employee.getAge());
+            textViewSalary.setText("$" + employee.getSalary());
+            id.setText("EmployeeID: " + employee.getId());
         }
 
         @Override
         public void onClick(View view) {
             Employee employee = employees.get(getAdapterPosition());
 
-            Intent intent = new Intent(context, Detail.class);
-            intent.putExtra("employee",employee);
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("employee", employee);
 
             context.startActivity(intent);
         }
