@@ -22,7 +22,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     private List<Employee> employees;
     private Context context;
 
-    private List<Employee> emloyeesFullList;
+    private List<Employee> employeesFullList;
 
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
@@ -31,7 +31,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public ListAdapter(List<Employee> employees, Context context) {
         this.employees = employees  ;
         this.context = context;
-        emloyeesFullList = new ArrayList<>(employees);
+        employeesFullList = new ArrayList<>(employees);
     }
 
     @NonNull
@@ -69,10 +69,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             List<Employee> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(emloyeesFullList);
+                filteredList.addAll(employeesFullList);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Employee employee : emloyeesFullList) {
+                for (Employee employee : employeesFullList) {
                     if (employee.getName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(employee);
                     }

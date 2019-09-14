@@ -111,7 +111,6 @@ public class DetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                startActivity(new Intent(getApplication(), ListActivity.class));
                 Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -157,7 +156,6 @@ public class DetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
-                startActivity(new Intent(getApplication(), ListActivity.class));
                 Toast.makeText(DetailActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 finish();
             }

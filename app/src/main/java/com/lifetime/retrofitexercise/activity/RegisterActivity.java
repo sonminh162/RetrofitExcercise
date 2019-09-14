@@ -69,9 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
-                finish();
-                startActivity(new Intent(getApplication(), ListActivity.class));
                 Toast.makeText(RegisterActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
